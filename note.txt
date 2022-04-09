@@ -1,0 +1,3 @@
+1. Array is fix length
+2. Slice are like Array but can grow or shrink
+    2.1 Slice must contain the same type  
