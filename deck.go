@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 // create type deck
@@ -46,6 +48,15 @@ func (d deck) saveToFile(filename string) error {
 	byteString := []byte(d.toString())
 	// 0666 means anyone can read and write this file
 	return ioutil.WriteFile(filename, byteString, 0666)
+}
+
+func (d deck) shuffle() {
+	for i := range d {
+		rand.Seed(time.Now().UnixNano())
+		newPos := rand.Intn(len(d) - 1)
+
+		d[i], d[newPos] = d[newPos], d[i]
+	}
 }
 
 func newDeckFromFile(filename string) deck {
